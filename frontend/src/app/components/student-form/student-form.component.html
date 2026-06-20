@@ -1,0 +1,274 @@
+<style>
+  /* Page Background */
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #eef6ff, #f8fafc);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Heading */
+h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #1e40af;
+  font-weight: 700;
+}
+
+/* Form Card */
+form {
+  width: 80%;
+  /* max-width: 1400px; */
+  margin: auto;
+  background: white;
+  padding: 35px;
+  border-radius: 22px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  border: 1px solid #e5e7eb;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #dbeafe;
+  border-radius: 12px;
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: all .3s ease;
+}
+
+/* Focus Effect */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 12px rgba(37,99,235,.25);
+}
+
+/* Dropdown */
+select {
+  background: white;
+  cursor: pointer;
+}
+
+/* Textarea */
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Label */
+label {
+  display: block;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+/* File Upload */
+input[type="file"] {
+  width: 100%;
+  padding: 15px;
+  border: 2px dashed #93c5fd;
+  border-radius: 12px;
+  background: #eff6ff;
+  cursor: pointer;
+}
+
+/* Submit Button */
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+/* Hover */
+button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(37,99,235,.3);
+}
+
+/* Disabled Button */
+button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* Input Hover */
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: #60a5fa;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  form {
+    padding: 25px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+}
+</style>
+
+<h2>Add Student</h2>
+
+<form (ngSubmit)="saveStudent()">
+
+  <input
+    type="text"
+    placeholder="Name"
+    [(ngModel)]="student.name"
+    name="name"
+    required>
+
+  <br><br>
+
+  <input
+    type="text"
+    placeholder="Course"
+    [(ngModel)]="student.course"
+    name="course"
+    required>
+
+  <br><br>
+
+    <select
+  [(ngModel)]="student.year"
+  name="year"
+  required>
+
+    <option value="">
+      Select Year
+    </option>
+
+    <option [ngValue]="1">
+      First Year
+    </option>
+
+    <option [ngValue]="2">
+      Second Year
+    </option>
+
+    <option [ngValue]="3">
+      Third Year
+    </option>
+
+    <option [ngValue]="4">
+      Final Year
+    </option>
+
+  </select>
+
+  <br><br>
+
+  <input
+    type="date"
+    [(ngModel)]="student.dob"
+    name="dob"
+    required>
+
+  <br><br>
+
+  <input
+  type="email"
+  [(ngModel)]="student.email"
+  name="email"
+  placeholder="Email"
+  pattern="[a-zA-Z0-9._%+-]+@gmail\.com$"
+  required>
+
+  <br><br>
+
+  <input
+  type="text"
+  [(ngModel)]="student.mobile"
+  name="mobile"
+  placeholder="Mobile"
+  pattern="[0-9]{10}"
+  maxlength="10"
+  required>
+
+  <br><br>
+
+  <select
+    [(ngModel)]="student.gender"
+    name="gender"
+    required>
+
+    <option value="">
+      Select Gender
+    </option>
+
+    <option value="Male">
+      Male
+    </option>
+
+    <option value="Female">
+      Female
+    </option>
+
+    <option value="Other">
+      Other
+    </option>
+
+  </select>
+
+  <br><br>
+
+  <textarea
+    placeholder="Address"
+    [(ngModel)]="student.address"
+    name="address"
+    required>
+  </textarea>
+
+  <br><br>
+
+  <label>
+    Student Photo
+  </label>
+
+  <br>
+
+  <input
+    type="file"
+    (change)="onFileSelected($event)">
+
+  <br><br>
+
+  <form
+  #studentForm="ngForm"
+  (ngSubmit)="saveStudent()">
+
+  <button
+  type="submit"
+  [disabled]="!studentForm.valid">
+
+  Save Student
+
+</button>
+
+</form>

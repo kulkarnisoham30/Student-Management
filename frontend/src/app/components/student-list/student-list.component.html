@@ -1,0 +1,245 @@
+<style>
+  /* Page Background */
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #eef6ff, #f8fafc);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Heading */
+h2 {
+  text-align: center;
+  color: #1e40af;
+  font-size: 2.3rem;
+  font-weight: 700;
+}
+
+/* Search Box */
+.search-box {
+  width: 100%;
+  max-width: 450px;
+  display: block;
+  margin: 0 auto 25px;
+  padding: 14px 18px;
+  border: 2px solid #dbeafe;
+  border-radius: 30px;
+  font-size: 15px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.search-box:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.25);
+}
+
+/* Table Container */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* Header */
+thead {
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+  color: white;
+}
+
+th {
+  padding: 18px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Rows */
+td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr {
+  transition: all 0.25s ease;
+}
+
+tbody tr:hover {
+  background: #eff6ff;
+  transform: scale(1.005);
+}
+
+/* Student Photo */
+.student-photo {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #2563eb;
+  box-shadow: 0 4px 10px rgba(37,99,235,0.25);
+}
+
+/* Edit Button */
+.edit-btn {
+  background: linear-gradient(
+    135deg,
+    #10b981,
+    #059669
+  );
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(16,185,129,0.3);
+}
+
+/* Delete Button */
+.delete-btn {
+  background: linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626
+  );
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(239,68,68,0.3);
+}
+
+/* Zebra Rows */
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* Responsive Table */
+@media (max-width: 992px) {
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+  }
+
+}
+</style>
+
+<h2>Student List</h2>
+
+<input
+  type="text"
+  placeholder="Search Student..."
+  [(ngModel)]="searchText"
+  (input)="searchStudent()"
+  class="search-box">
+
+<table>
+
+  <thead>
+
+    <tr>
+
+      <th>Photo</th>
+      <th>Admission No</th>
+      <th>Name</th>
+      <th>Course</th>
+      <th>Year</th>
+      <th>Email</th>
+      <th>Actions</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let student of filteredStudents">
+
+      <td>
+
+        <img
+          *ngIf="student.photo"
+          [src]="'http://localhost:5001/uploads/' + student.photo"
+          class="student-photo">
+
+      </td>
+
+      <td>{{student.admission_number}}</td>
+
+      <td>{{student.name}}</td>
+
+      <td>{{student.course}}</td>
+
+      <td>{{student.year}}</td>
+
+      <td>{{student.email}}</td>
+
+      <td>
+
+        <button
+          class="edit-btn"
+          [routerLink]="['/edit', student.id]">
+
+          Edit
+
+        </button>
+
+        <button
+          class="delete-btn"
+          (click)="deleteStudent(student.id)">
+
+          Delete
+
+        </button>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+
+</table>

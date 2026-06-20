@@ -1,0 +1,237 @@
+<style>
+  /* Page Background */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+  padding: 10px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+h2 {
+  text-align: center;
+  color: #1e3a8a;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Form Card */
+form {
+  max-width: 700px;
+  margin: auto;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e5e7eb;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #dbeafe;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Focus Effects */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.25);
+}
+
+/* Textarea */
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  color: #374151;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* File Input */
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px dashed #93c5fd;
+  border-radius: 10px;
+  background: #eff6ff;
+  cursor: pointer;
+}
+
+/* Student Photo */
+img {
+  display: block;
+  margin: 15px auto;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #2563eb;
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  form {
+    padding: 25px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+}
+</style>
+
+<h2>Edit Student</h2>
+
+<form (ngSubmit)="updateStudent()">
+
+  <input
+    type="text"
+    [(ngModel)]="student.name"
+    name="name"
+    placeholder="Name">
+
+  <br><br>
+
+  <input
+    type="text"
+    [(ngModel)]="student.course"
+    name="course"
+    placeholder="Course">
+
+  <br><br>
+
+  <input
+    type="number"
+    [(ngModel)]="student.year"
+    name="year"
+    placeholder="Year"
+    min="1"
+    max="4"
+    required>
+
+  <br><br>
+
+  <input
+    type="date"
+    [(ngModel)]="student.dob"
+    name="dob">
+
+  <br><br>
+
+  <input
+  type="email"
+  [(ngModel)]="student.email"
+  name="email"
+  placeholder="Email"
+  pattern="[a-zA-Z0-9._%+-]+@gmail\.com$"
+  required>
+
+  <br><br>
+
+  <input
+  type="text"
+  [(ngModel)]="student.mobile"
+  name="mobile"
+  placeholder="Mobile"
+  pattern="[0-9]{10}"
+  maxlength="10"
+  required>
+
+  <br><br>
+
+  <select
+    [(ngModel)]="student.gender"
+    name="gender"
+    required>
+
+    <option value="">
+      Select Gender
+    </option>
+
+    <option value="Male">
+      Male
+    </option>
+
+    <option value="Female">
+      Female
+    </option>
+
+    <option value="Other">
+      Other
+    </option>
+
+  </select>
+
+  <br><br>
+
+  <textarea
+    [(ngModel)]="student.address"
+    name="address"
+    placeholder="Address">
+  </textarea>
+
+  <br><br>
+
+  <img
+    *ngIf="student.photo"
+    [src]="'http://localhost:5001/uploads/' + student.photo"
+    width="120">
+
+  <br><br>
+
+  <label>Change Photo</label>
+
+  <br>
+
+  <input
+    type="file"
+    (change)="onFileSelected($event)">
+
+  <br><br>
+
+  <button type="submit">
+    Update Student
+  </button>
+
+</form>
