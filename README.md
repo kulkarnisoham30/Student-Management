@@ -94,7 +94,7 @@ StudentManagementSystem <br>
 <h2>Links:</h2>
 
 <h3>GitHub:</h3>
-https://github.com/kulkarnisoham30
+https://github.com/kulkarnisoham30/Student-Management.git
 
 <h3>Link:</h3>
 https://verdant-cranachan-4904e0.netlify.app/
